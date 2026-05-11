@@ -16,8 +16,8 @@
     <div>
         <h2>Wat is docker en waarvoor word het gebruikt.</h2>
         <p>Docker is een platform dat IT’ers vaak gebruiken om software die ze hebben ontwikkeld in containers te plaatsen.
-Doordat de software in een container zit, kun je deze overal uitvoeren en blijft het altijd hetzelfde, ongeacht het systeem of de omgeving.
-Het is snel, eenvoudig en zorgt ervoor dat applicaties consistent draaien op elke machine.</p>
+        Doordat de software in een container zit, kun je deze overal uitvoeren en blijft het altijd hetzelfde, ongeacht het systeem of de omgeving.
+        Het is snel, eenvoudig en zorgt ervoor dat applicaties consistent draaien op elke machine.</p>
     </div>
 
     <h2>Installatie Docker</h2>
@@ -38,6 +38,37 @@ Het is snel, eenvoudig en zorgt ervoor dat applicaties consistent draaien op elk
             <li>u bent nu klaar om Docker te gebruiken.</li>
         </ol>
     </div>
+
+    <h2>Basis Commando's</h2>
+    <div>
+        <ul>
+            <li><strong>cd [naam van de directory]</strong>: Navigeert naar de opgegeven directory anders kan je niks doen met docker.</li>
+            <li><strong>docker compose up -d</strong>: Start alle containers die zijn gedefinieerd in het docker-compose.yml bestand in de achtergrond.</li>
+            <li><strong>docker ps</strong>: Toont een lijst van alle actieve containers. Gebruik <code>docker ps -a</code> om ook gestopte containers te zien.</li>
+            <li><strong>docker images</strong>: Toont een lijst van alle beschikbare images op je systeem.</li>
+            <li><strong>docker pull</strong>: Hiermee download je een image van Docker Hub. Bijvoorbeeld: <code>docker pull python</code> downloadt de Python image.</li>
+            <li><strong>docker rmi [naam van de image]</strong>: Verwijdert een specifieke image van je systeem. Bijvoorbeeld: <code>docker rmi python</code> verwijdert de Python image.</li>
+            <li><strong>docker logs [naam van de container]</strong>: Toont de logboeken van een specifieke container. Bijvoorbeeld: <code>docker logs my-container</code>.</li>
+            <li><strong>docker --version</strong>: Toont de versie van Docker die geïnstalleerd is. Bijvoorbeeld: <code>docker --version</code>.</li>
+            <li><strong>docker compose down -v</strong>: Stopt een actieve container. Bijvoorbeeld: <code>docker compose down -v</code>.</li>
+        </ul>
+        <p>dit zijn de basis commando's voor het werken met Docker.</p>
+        <p>onderaan van de pagina vind je foto's Dat een beelt van comando's in beeld brengen.</p>
+    </div>
+
+    <h2>Dockerfile</h2>
+    <div>
+        <p>Een Dockerfile is eigenlijk gewoon mijn eigen recept waarin ik stap voor stap heb opgeschreven hoe mijn applicatie gebouwd moet worden. In dit tekstbestand bepaal ik precies welke omgeving, bestanden en instellingen er nodig zijn.Het fijne hiervan is dat ik niet telkens alles handmatig hoef in te stellen; Docker volgt gewoon mijn lijstje met instructies en bouwt zo elke keer exact dezelfde image. Hierdoor weet ik zeker dat mijn app overal hetzelfde werkt, zonder gedoe.
+        </p>
+        <p>onder aan van de pagina vind je foto's Dat een beelt van een Dockerfile in beeld brengt.</p>
+        
+    </div>
+    <h2>Docker Compose</h2>
+    <div>
+        <p>Docker Compose is een handig hulpmiddel waarmee ik meerdere containers tegelijk kan beheren. In plaats van elke container apart te starten, kan ik met een enkel commando al mijn services opzetten. Ik schrijf gewoon een docker-compose.yml bestand waarin ik beschrijf welke containers ik nodig heb, hoe ze met elkaar moeten communiceren en welke instellingen ze moeten hebben. Hierdoor kan ik mijn hele applicatie in één keer opstarten, zonder gedoe met losse commando's voor elke container.</p>
+        <p>onder aan van de pagina vind je foto's Dat een beelt van een Docker Compose in beeld brengt.</p>
+    </div>
+
     <div  >
         <figure id="installatieFotos">
             <img src="Imagen/installeren1.png" alt="Installatie Stap 1" style="max-width: 250px; height: auto;" >
@@ -50,6 +81,27 @@ Het is snel, eenvoudig en zorgt ervoor dat applicaties consistent draaien op elk
             <img src="Imagen/installeren8.png" alt="Installatie Stap 8" style="max-width: 250px; height: auto;">
             <img src="Imagen/installeren9.png" alt="Installatie Stap 9" style="max-width: 250px; height: auto;">
             <img src="Imagen/installeren10.png" alt="Installatie Stap 10" style="max-width: 250px; height: auto;">
+        </figure>
+    </div>
+    
+    <div>
+        <figure id="commandoFotos">
+            <img src="Imagen/commandos1.png" alt="Commando 1" style="max-width: 250px; height: auto;" >
+            <img src="Imagen/commandos2.png" alt="Commando 2"  style="max-width: 250px; height: auto;">
+            <img src="Imagen/commandos3.png" alt="Commando 3" style="max-width: 250px; height: auto;">
+            <img src="Imagen/commandos4.png" alt="Commando 4" style="max-width: 250px; height: auto;">
+            <img src="Imagen/commandos5.png" alt="Commando 5" style="max-width: 250px; height: auto;">
+            <img src="Imagen/commandos6.png" alt="Commando 6" style="max-width: 250px; height: auto;">
+            <img src="Imagen/commandos7.png" alt="Commando 7" style="max-width: 250px; height: auto;">
+            <img src="Imagen/commandos8.png" alt="Commando 8" style="max-width: 250px; height: auto;">
+            <img src="Imagen/commandos9.png" alt="Commando 9" style="max-width: 250px; height: auto;">
+        </figure>
+    </div>
+
+    <div>
+        <figure id="dockerCompose/filesFotos">
+            <img src="Imagen/dockerfile.png" alt="Dockerfile" style="max-width: 250px; height: auto;">
+            <img src="Imagen/dockerCompose.png" alt="Docker Compose" style="max-width: 250px; height: auto;" >  
         </figure>
     </div>
     

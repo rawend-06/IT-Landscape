@@ -1,0 +1,26 @@
+<h1>CI/CD Pipeline</h1>
+
+<h2>Wat is een CI/CD Pipeline?</h2>
+<p>CI/CD (Continuous Integration / Continuous Delivery of Deployment) is een manier van werken waarbij elke codewijziging automatisch wordt gebouwd en gecontroleerd (bijv. testen) via een pipeline. Daarna wordt de software of een artifact zoals een Docker image automatisch geleverd of gedeployed naar een omgeving of registry (zoals GitHub Packages/GHCR). Het doel is sneller, betrouwbaarder en herhaalbaar software opleveren met minder menselijke fouten.</p>
+
+<h2>Wat zijn de voordelen ervan?</h2>
+
+<ul>
+    <li>Snellere feedback</li>
+    <li>Minder fouten</li>
+    <li>Betere samenwerking</li>
+    <li>Minder handmatig werk</li>  
+</ul>
+
+<h2>Hoe moet je een CI/CD Pipeline maken?</h2>
+
+<ol>
+    <li>je maakt een applicatie</li>
+    <li>erna maaak je een dockerfile aan</li>
+    <li>zet de juiste gegevens in de dockerfile</li>
+    <li>als je dat hebt gedaan moet je een folder .github maken en daarin nog een folder workflows</li>
+    <li>in de folder workflows maak je een yml bestand aan</li>
+    <li>in dat yml bestand zet je de juiste gegevens en stappen erin</li>
+    <li>als dat gedaan is, is het klaar en dan kan je het testen als je naar je repo op git hub gaat en daar naar action gaat moet er een worflow staan met een groene bol</li>
+    <li>nu elk keer als je een wijziging aanbrengt in je code en die pusht naar github, zal de pipeline automatisch worden uitgevoerd en zal je feedback krijgen over het resultaat van de build en tests.</li>
+</ol>

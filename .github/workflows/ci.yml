@@ -1,0 +1,17 @@
+name: IT Landscape CI
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Repo ophalen
+        uses: actions/checkout@v4
+
+      - name: Toon projectstructuur
+        run: ls -R

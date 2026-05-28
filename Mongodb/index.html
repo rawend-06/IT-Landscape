@@ -1,0 +1,146 @@
+<h1>MongoDB</h1>
+
+<h2>What is MongoDB?</h2>
+<p>MongoDB is een NoSQL-database die gegevens opslaat in flexibele, JSON-achtige documenten in plaats van in tabellen zoals bij relationele databases.
+Een belangrijk voordeel is dat je geen vast schema nodig hebt, waardoor je makkelijk data kunt aanpassen en opschalen tijdens de ontwikkeling.
+Daarnaast is MongoDB goed schaalbaar en kan het grote hoeveelheden data efficiënt verwerken door gegevens te verdelen over meerdere servers.</p>
+
+
+<h2>Praktische toepassingen van MongoDB</h2>
+<ul>
+  <li> <strong>Web- en mobiele apps</strong>om gebruikersdata op te slaan.</li>
+  <li> <strong>Real-time data</strong>zoals klikgedrag of sensoren analyseren.</li>
+  <li> <strong>Opslag van content</strong>en grote hoeveelheden logs.</li>
+</ul>
+
+<h2>Installatie</h2>
+
+<ol>
+  <li>maak in de folder een bestand 'docker-compose.yml' aan</li>
+  <li>voeg de volgende inhoud toe aan het bestand:
+    <pre>
+        version: '3.8'
+        services:
+        mongodb:
+          image: mongo:7.0
+          container_name: mongodb
+          restart: always
+          ports:
+            - "27017:27017"
+          environment:
+            MONGO_INITDB_ROOT_USERNAME: admin
+            MONGO_INITDB_ROOT_PASSWORD: geheimwachtwoord
+          volumes:
+            - mongodb_data:/data/db
+
+        mongo-express:
+          image: mongo-express:latest
+          container_name: mongo-express
+          restart: always
+          ports:
+            - "8081:8081"
+          environment:
+            ME_CONFIG_MONGODB_ADMINUSERNAME: admin
+            ME_CONFIG_MONGODB_ADMINPASSWORD: geheimwachtwoord
+            ME_CONFIG_MONGODB_URL: mongodb://admin:geheimwachtwoord@mongodb:27017/
+            ME_CONFIG_BASICAUTH: false
+          depends_on:
+            - mongodb
+
+          volumes:
+            mongodb_data:
+        </pre>
+  </li>
+  <li>start de containers met het commando: <code>docker-compose up -d</code></li>
+  <li>open uw browser en navigeer naar http://localhost:8081</li>
+  <li>type recht vanboven de naam van je nieuwe database ern klik erna op create database</li>
+</ol>
+
+
+<h2>Beheer commandos</h2>
+
+<ul>
+  <li><code>docker compose up -d</code> - Start de MongoDB en Mongo Express containers.</li>
+  <li><code>docker compose down</code> - Stop en verwijder de containers.</li>
+  <li><code>docker volume ls -f</code> - Toon alle volumes.</li>
+  <li><code>docker exec mongodb mongosh -u admin -p geheimwachtwoord --authenticationDatabase admin</code> - Open een shell in de MongoDB container om direct commando's uit te voeren.</li>
+  <li><code>docker exec mongo-express bash</code> - Open een shell in de Mongo Express container.</li>
+  <li><code>show dbs</code> - Toon alle databases.</li>
+  <li><code>db.gebruikers.insertOne({})</code> - Voeg een nieuw regel toe aan de 'gebruikers' collectie.</li>
+  <li><code>db.gebruikers.find()</code> - Toon alle documenten in de 'gebruikers' collectie.</li>
+</ul>
+
+<h2>Backup maken</h2>
+
+<ol>
+  <li><code>docker exec mongodb mongodump --username admin --password geheimwachtwoord --authenticationDatabase admin --out /data/backup</code>maakt een database-backup en zet die in een map in de container.</li>
+  <li><code>docker cp mongodb:/data/backup ./backup</code> - Kopieer de backup van de container naar je lokale machine.</li>
+  <li>als je alles opnieuw opstart moet je eigelijk nog steeds je oude gegevens die je in je database had staan kunnen zien, omdat die in een volume staan dat niet verwijderd wordt als je de containers verwijdert.</li>
+</ol>
+
+<h2>schaalbaarheid</h2>
+
+<p>schaalbaarheid betekent dat je database makkelijk kan meegroeien als je meer data of gebruikers krijgt.</p>
+
+<ul>
+  <li><strong>Sharding</strong> - Verdeling van data over meerdere servers.</li>
+</ul>
+
+<ol>
+  <li>pas de docker-compose.yml file aan om de schaalbaarheid te verbeteren.
+    <pre>
+      services:
+  mongo1:
+    image: mongo:7.0
+    container_name: mongo1
+    command: mongod --replSet rs0 --bind_ip_all
+    ports:
+      - "27017:27017"
+    volumes:
+      - mongo1_data:/data/db
+  mongo2:
+    image: mongo:7.0
+    container_name: mongo2
+    command: mongod --replSet rs0 --bind_ip_all
+    ports:
+      - "27018:27017"
+    volumes:
+      - mongo2_data:/data/db
+  mongo3:
+    image: mongo:7.0
+    container_name: mongo3
+    command: mongod --replSet rs0 --bind_ip_all
+    ports:
+      - "27019:27017"
+    volumes:
+      - mongo3_data:/data/db
+  mongo-express:
+    image: mongo-express:latest
+    container_name: mongo-express
+    restart: always
+    ports:
+      - "8081:8081"
+    environment:
+      ME_CONFIG_MONGODB_URL: mongodb://mongo1:27017,mongo2:27017,mongo3:27017/?replicaSet=rs0
+      ME_CONFIG_BASICAUTH: false
+    depends_on:
+      - mongo1
+      - mongo2
+      - mongo3
+volumes:
+  mongo1_data:
+  mongo2_data:
+  mongo3_data:
+    </pre>
+  </li>
+  <li><code>docker exec -it mongo1 mongosh --eval "rs.initiate()"</code> - Dit comando start de replica set zodat de MongoDB servers samenwerken als één systeem.</li>
+</ol>
+
+<h2>Hulpmiddelen</h2>
+
+<ul>
+  <li><a href="https://www.mongodb.com/docs/" target="_blank">MongoDB Documentatie</a></li>
+  <li><a href="https://hub.docker.com/_/mongo" target="_blank">MongoDB Docker Documentatie</a></li>
+  <li><a href="https://hub.docker.com/_/mongo-express" target="_blank">MongoDB Express Documentatie</a></li>
+  
+</ul>
